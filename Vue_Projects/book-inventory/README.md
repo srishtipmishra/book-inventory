@@ -1,6 +1,6 @@
 # book-inventory
 
-> A Vue.js project
+> A Vue.js web application to maintain book inventory
 
 ## Build Setup
 
