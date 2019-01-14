@@ -1,30 +1,30 @@
 <template>
   <div>
-    <div class = "row btn-status" >
-      <b-button class="btn btn-success" @click="getAllRead" role="button">Read</b-button>
+    <div class = "btn-status" >
+      <b-button class="btn btn-success"  @click="getAllRead" role="button">Read</b-button>
       <b-button class="btn btn-success" @click="getCurrentlyReading" role="button">Reading</b-button>
       <b-button class="btn btn-success" @click.stop.prevent="getWishList" role="button">Wishlist</b-button>
     </div>
-    <div class="table-container" v-if="listType === ''">
+    <div class="" v-if="listType === ''">
       <div class="row">
         <div class="col-xs-12 col-md-8">
           <h3 class="table-title">All Books</h3>
         </div>
       </div>
-      <div class="row" :class = "['vertical-padding', 'header-class']">
-        <div class="col">Title</div>
-        <div class="col">Author</div>
-        <div class="col">Status</div>
+      <div class="row header-class">
+        <div class="col-3">Title</div>
+        <div class="col-3">Author</div>
+        <div class="col-2">Status</div>
       </div>
       <template v-for="(book,i) in allBooks">
-        <b-row :class="['row', 'table-row']" :key="book.title + i" >
-          <b-checkbox @change="toggleBookSelection(book)"/>
-          <div class="col-sm-4">{{book.title}}</div>
-          <div class="col-sm-4">{{book.author}}</div>
-          <div class="col-sm-4">{{book.status}}</div>
-          <b-button class="btn btn-primary" v-if="book.status === 'wishlist'" @click="addToReading(book)">Start Reading</b-button>
-          <b-button class="btn btn-primary" v-if="book.status === 'reading'" @click="addToRead(book)">Finished Reading</b-button>
-        </b-row>
+        <div class="row" :class="['table-row']" :key="book.title + i" >
+          <b-checkbox class="chkbox" @change="toggleBookSelection(book)"/>
+          <div class="col-3 table-row">{{book.title}}</div>
+          <div class="col-3 table-row">{{book.author}}</div>
+          <div class="col-2 table-row">{{book.status}}</div>
+          <div class="col-2 table-row" v-if="book.status === 'wishlist'" @click="addToReading(book)" role="button">Start Reading</div>
+          <div class="col-2 table-row" v-if="book.status === 'reading'" @click="addToRead(book)" role="button">Finished Reading</div>
+        </div>
       </template>
     </div>
     <reading :listType="listType" :books="currentList" v-if="listType !== ''"></reading>
@@ -130,23 +130,32 @@ export default {
     padding-top: 7px;
     padding-bottom: 7px;
   }
-  .btn-status .btn-primary{
-    padding: 5px 10px;
+  .btn-status {
+    padding-left: 5px 10px;
   }
   .header-class {
     background-color: lavender;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-indent: -10px;
-    text-align: left;
+    /* text-indent: -10px; */
+    text-align: center;
   }
   .table-row {
     text-align: left;
     padding: 5px;
-    border: solid lightslategray;
-    border-top: .5px;
+    border: solid 1px lightslategray;
+    /* border-top: .5px; */
   }
   .btn-status {
     float: right;
     padding-right: 15px;
+  }
+  .action-buttons {
+    display: inline;
+  }
+  .chkbox {
+    margin-left: 10px;
+  }
+  .table-row{
+    text-align: center;
   }
 </style>
